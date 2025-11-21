@@ -1,5 +1,5 @@
 <header class="site-header shadow-sm">
-	<nav class="navbar navbar-expand-lg navbar-light fixed-top" aria-label="Navegação principal">
+	<nav class="navbar navbar-expand-lg navbar-light" aria-label="Navegação principal">
 		<div class="container">
 			<a class="navbar-brand" href="#hero">
 				<img
@@ -21,10 +21,30 @@
 			>
 				<span class="navbar-toggler-icon"></span>
 			</button>
+			<div class="theme-toggle-floating" aria-live="polite">
+				<span class="visually-hidden" id="theme-toggle-label">Alternar modo do site</span>
+				<input
+					type="checkbox"
+					id="theme-toggle"
+					class="theme-toggle-input"
+					aria-labelledby="theme-toggle-label"
+				/>
+				<label class="theme-toggle-control" for="theme-toggle">
+					<span class="theme-toggle-icon theme-toggle-icon--sun" aria-hidden="true">
+						<i class="fas fa-sun"></i>
+					</span>
+					<span class="theme-toggle-pill" aria-hidden="true">
+						<span class="theme-toggle-thumb"></span>
+					</span>
+					<span class="theme-toggle-icon theme-toggle-icon--moon" aria-hidden="true">
+						<i class="fas fa-moon"></i>
+					</span>
+				</label>
+			</div>
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto align-items-lg-center">
 					<li class="nav-item">
-						<a class="nav-link active" href="#hero" aria-current="page">Início</a>
+						<a class="nav-link" href="#hero">Início</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#servicos">Serviços</a>
@@ -37,26 +57,6 @@
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#contato">Contato</a>
-					</li>
-					<li class="nav-item">
-						<div class="theme-switch-wrapper" aria-label="Alternar modo do site">
-							<label class="theme-switch" for="theme-toggle">
-								<span class="theme-switch-label" aria-hidden="true">Modo</span>
-								<span class="visually-hidden">Alternar modo escuro</span>
-								<input type="checkbox" id="theme-toggle" />
-								<div class="slider round" aria-hidden="true">
-									<span class="slider-option slider-option--light">
-										<i class="fas fa-sun" aria-hidden="true"></i>
-										<span>Claro</span>
-									</span>
-									<span class="slider-option slider-option--dark">
-										<i class="fas fa-moon" aria-hidden="true"></i>
-										<span>Escuro</span>
-									</span>
-									<span class="slider-thumb"></span>
-								</div>
-							</label>
-						</div>
 					</li>
 					<li class="nav-item d-none d-lg-block ms-lg-3">
 						<a

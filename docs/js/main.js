@@ -84,15 +84,15 @@
 		],
 		team: [
 			{
-				name: 'Dra. Ana Moraes',
+				name: 'Dra. Fabiola Rosseto',
 				role: 'Clínica geral e fundadora',
 				crm: 'CRMV-SP 12345',
 				specialties: ['Clínica médica', 'Intensivismo'],
-				photo: 'https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&w=600'
+				photo: 'img/fabiola.jpg'
 			},
 			{
-				name: 'Dr. Matheus Menani',
-				role: 'Cirurgião de tecidos moles e plantonista',
+				name: 'Dr. Matheus F. Menani',
+				role: 'Cirurgião e clínico geral, fundador',
 				specialties: ['Cirurgia geral', 'Atendimento emergencial'],
 				photo: 'img/matheus foto.png'
 			}
@@ -231,6 +231,7 @@
 	}
 
 	function setupInteractions(content = {}) {
+		const resolvedContact = content.contact || CONTENT_FALLBACK.contact;
 		secureExternalLinks();
 		setupServiceFilters();
 		setupFaqAccordions();
@@ -238,8 +239,12 @@
 		setupButtonPointerGlow();
 		setupMotionEffects();
 		setupThemeSwitcher();
+		setupMobileContactShortcuts(resolvedContact);
+		syncDesktopWhatsappButton(resolvedContact);
 		setupSmoothScroll();
 		highlightNavOnScroll();
+		setupIntelligentMobileBar();
+		setupStatCounters();
 		updateCurrentYear();
 		if (!content.services || !content.services.length) {
 			showToast('Atualize o conteúdo em breve para preencher serviços.', 'warning');
@@ -409,7 +414,7 @@
 			column.className = 'col-lg-3 col-md-4 col-sm-6';
 			column.innerHTML = `
 				<article class="team-card card h-100 text-center">
-					${member.photo ? `<div class="team-photo"><img src="${escapeAttribute(member.photo)}" alt="${escapeAttribute(member.name || 'Profissional PontoVet')}" loading="lazy"></div>` : ''}
+					${member.photo ? `<div class="team-photo"><img src="${escapeAttribute(member.photo)}" alt="Foto profissional - ${escapeAttribute(member.name || 'PontoVet')}" width="128" height="128" loading="lazy" decoding="async"></div>` : ''}
 					<h3 class="team-name">${escapeHTML(member.name || 'Profissional PontoVet')}</h3>
 					<p class="team-role">${escapeHTML(member.role || 'Especialista')}</p>
 					${member.crm ? `<p class="team-crm">${escapeHTML(member.crm)}</p>` : ''}
@@ -446,7 +451,7 @@
 			column.innerHTML = `
 				<article class="testimonial-card">
 					<div class="testimonial-avatar">
-						<img src="${escapeAttribute(testimonial.image)}" alt="${escapeAttribute(testimonial.author)}">
+						<img src="${escapeAttribute(testimonial.image)}" alt="Foto de ${escapeAttribute(testimonial.author)}" width="80" height="80" loading="lazy" decoding="async">
 					</div>
 					<p class="testimonial-quote">"${escapeHTML(testimonial.quote)}"</p>
 					<div class="testimonial-author">${escapeHTML(testimonial.author)}</div>
@@ -596,8 +601,36 @@
 		tabs.forEach(tab => {
 			tab.addEventListener('click', () => {
 				const category = tab.getAttribute('data-services-filter');
-				tabs.forEach(btn => btn.classList.toggle('active', btn === tab));
+				tabs.forEach(btn => {
+					const isActive = btn === tab;
+					btn.classList.toggle('active', isActive);
+					btn.setAttribute('aria-selected', isActive.toString());
+				});
 				filterServices(category);
+			});
+
+			tab.addEventListener('keydown', event => {
+				const index = Array.from(tabs).indexOf(tab);
+				let targetIndex = index;
+
+				if (event.key === 'ArrowLeft') {
+					targetIndex = index > 0 ? index - 1 : tabs.length - 1;
+					event.preventDefault();
+				} else if (event.key === 'ArrowRight') {
+					targetIndex = index < tabs.length - 1 ? index + 1 : 0;
+					event.preventDefault();
+				} else if (event.key === 'Home') {
+					targetIndex = 0;
+					event.preventDefault();
+				} else if (event.key === 'End') {
+					targetIndex = tabs.length - 1;
+					event.preventDefault();
+				} else {
+					return;
+				}
+
+				tabs[targetIndex].focus();
+				tabs[targetIndex].click();
 			});
 		});
 	}
@@ -775,36 +808,50 @@
 				form.reset();
 				return;
 			}
-			const payload = Object.fromEntries(new FormData(form));
+			if (typeof form.reportValidity === 'function' && !form.reportValidity()) {
+				return;
+			}
+			const formData = new FormData(form);
+			const sanitizeInput = value => (value || '').toString().trim();
+			const payload = {
+				name: sanitizeInput(formData.get('name')),
+				subject: sanitizeInput(formData.get('subject'))
+			};
+			if (!(payload.name && payload.subject)) {
+				showInlineFeedback('Informe seu nome e assunto antes de enviar.', 'danger');
+				return;
+			}
 			const whatsappNumber = resolveWhatsappNumber();
 			if (!whatsappNumber) {
 				showInlineFeedback(
-					'Canal de WhatsApp indisponível no momento. Utilize o botão lateral.',
+					'Número do WhatsApp não configurado. Entre em contato por outro canal.',
 					'danger'
 				);
-				showToast('WhatsApp não configurado.', 'danger');
 				return;
 			}
-			const message = buildWhatsappMessage(payload);
-			const whatsappUrl = buildWhatsappUrl(whatsappNumber, message);
+			const whatsappUrl = buildWhatsappUrl(whatsappNumber, buildWhatsappMessage(payload));
 			try {
 				disableButton(submit, true);
 				const newWindow = window.open(whatsappUrl, '_blank');
 				if (!newWindow) {
-					throw new Error(
-						'Não foi possível abrir o WhatsApp. Desative o bloqueador de pop-ups e tente novamente.'
+					showInlineFeedback(
+						'Não foi possível abrir o WhatsApp. Desative o bloqueador de pop-ups e tente novamente.',
+						'warning'
 					);
+				} else {
+					showInlineFeedback(
+						'WhatsApp aberto com seus dados. Finalize o envio por lá.',
+						'success'
+					);
+					showToast('Conversa iniciada no WhatsApp.', 'success');
+					form.reset();
 				}
-				showInlineFeedback(
-					'Abrimos o WhatsApp com todos os dados preenchidos. Finalize o envio por lá.',
-					'success'
-				);
-				showToast('Conversa do WhatsApp iniciada com os dados do formulário.', 'success');
-				form.reset();
 			} catch (error) {
-				console.error('Erro ao redirecionar para o WhatsApp', error);
-				showInlineFeedback(error.message || 'Não foi possível abrir o WhatsApp.', 'danger');
-				showToast('Não conseguimos abrir o WhatsApp. Tente novamente.', 'danger');
+				console.error('Erro ao abrir WhatsApp', error);
+				showInlineFeedback(
+					'Erro ao abrir WhatsApp. Tente novamente ou use o botão lateral.',
+					'danger'
+				);
 			} finally {
 				disableButton(submit, false);
 			}
@@ -852,6 +899,23 @@
 		return digits;
 	}
 
+	function normalizeDialNumber(value) {
+		if (!value) {
+			return '';
+		}
+		const digits = value.toString().replace(/\D/g, '');
+		if (!digits) {
+			return '';
+		}
+		if (digits.startsWith('55') && digits.length >= 12) {
+			return `+${digits}`;
+		}
+		if (digits.length >= 10 && digits.length <= 11) {
+			return `+55${digits}`;
+		}
+		return `+${digits}`;
+	}
+
 	function resolveWhatsappNumber(preferredNumber) {
 		const candidates = [
 			preferredNumber,
@@ -862,6 +926,23 @@
 		].filter(Boolean);
 		for (const candidate of candidates) {
 			const normalized = normalizeWhatsappNumber(candidate);
+			if (normalized) {
+				return normalized;
+			}
+		}
+		return '';
+	}
+
+	function resolveDialNumber(preferredNumber) {
+		const candidates = [
+			preferredNumber,
+			appState.contact?.phone,
+			appState.contact?.whatsapp,
+			CONTENT_FALLBACK.contact.phone,
+			CONTENT_FALLBACK.contact.whatsapp
+		].filter(Boolean);
+		for (const candidate of candidates) {
+			const normalized = normalizeDialNumber(candidate);
 			if (normalized) {
 				return normalized;
 			}
@@ -880,8 +961,6 @@
 			return text || fallback;
 		};
 		const sections = [`Nome: ${safe(data.name)}`, `Assunto: ${safe(data.subject)}`];
-		const extra = (data.message || '').toString().trim();
-		sections.push(`Detalhes: ${extra || 'Tutor preferiu explicar por voz'}`);
 		return sections.join('\n');
 	}
 
@@ -897,6 +976,7 @@
 	function setupThemeSwitcher() {
 		const toggle = document.getElementById('theme-toggle');
 		if (!toggle) {
+			console.warn('Theme toggle não encontrado');
 			return;
 		}
 		const stored = localStorage.getItem('theme');
@@ -907,6 +987,64 @@
 		toggle.addEventListener('change', event => {
 			applyTheme(event.target.checked, true);
 		});
+	}
+
+	function setupMobileContactShortcuts(contact = {}) {
+		const resolvedContact = getResolvedContact(contact);
+		const callButton = document.querySelector('[data-call-action]');
+		const dialNumber = resolveDialNumber(resolvedContact.phone);
+		if (callButton && dialNumber) {
+			callButton.setAttribute('href', `tel:${dialNumber}`);
+			callButton.dataset.tel = dialNumber;
+			callButton.addEventListener('click', () => callButton.blur());
+		}
+		const whatsappButton = document.querySelector('[data-mobile-whatsapp]');
+		if (whatsappButton) {
+			const whatsappNumber = resolveWhatsappNumber(resolvedContact.whatsapp);
+			const fallbackWhatsapp = resolvedContact.whatsapp || resolvedContact.phone;
+			const whatsappLink = whatsappNumber
+				? createWhatsappLink(whatsappNumber)
+				: createWhatsappLink(fallbackWhatsapp);
+			if (whatsappLink) {
+				whatsappButton.setAttribute('href', whatsappLink);
+				whatsappButton.removeAttribute('aria-disabled');
+			} else {
+				whatsappButton.removeAttribute('href');
+				whatsappButton.setAttribute('aria-disabled', 'true');
+			}
+		}
+	}
+
+	function syncDesktopWhatsappButton(contact = {}) {
+		const button = document.querySelector('[data-contact-whatsapp]');
+		if (!button) {
+			return;
+		}
+		const resolvedContact = getResolvedContact(contact);
+		const whatsappNumber = resolveWhatsappNumber(resolvedContact.whatsapp);
+		const fallbackWhatsapp = resolvedContact.whatsapp || resolvedContact.phone;
+		const whatsappLink = whatsappNumber
+			? createWhatsappLink(whatsappNumber)
+			: createWhatsappLink(fallbackWhatsapp);
+		if (whatsappLink) {
+			button.setAttribute('href', whatsappLink);
+			button.removeAttribute('aria-disabled');
+			button.classList.remove('disabled');
+		} else {
+			button.removeAttribute('href');
+			button.setAttribute('aria-disabled', 'true');
+			button.classList.add('disabled');
+		}
+	}
+
+	function getResolvedContact(contact = {}) {
+		if (contact && Object.keys(contact).length) {
+			return contact;
+		}
+		if (appState.contact) {
+			return appState.contact;
+		}
+		return CONTENT_FALLBACK.contact;
 	}
 
 	function applyTheme(isDark, animate) {
@@ -928,10 +1066,12 @@
 
 	function setupSmoothScroll() {
 		const navbar = document.querySelector('.navbar');
-		const offset = navbar?.offsetHeight || 0;
-		document.querySelectorAll('a.nav-link[href^="#"]').forEach(link => {
+		const offset = navbar?.offsetHeight || 80;
+		document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
 			link.addEventListener('click', event => {
-				const target = document.querySelector(link.getAttribute('href'));
+				const href = link.getAttribute('href');
+				if (!href || href === '#') return;
+				const target = document.querySelector(href);
 				if (!target) {
 					return;
 				}
@@ -945,10 +1085,25 @@
 	function highlightNavOnScroll() {
 		const sections = document.querySelectorAll('section[id]');
 		const navLinks = document.querySelectorAll('.nav-link');
+		if (!sections.length || !navLinks.length) return;
+		
+		let hasScrolled = false;
+
+		window.addEventListener(
+			'scroll',
+			() => {
+				hasScrolled = true;
+				document.body.classList.add('nav-ready');
+			},
+			{ once: true }
+		);
+
+		if (typeof IntersectionObserver === 'undefined') return;
+		
 		const observer = new IntersectionObserver(
 			entries => {
 				entries.forEach(entry => {
-					if (!entry.isIntersecting) {
+					if (!entry.isIntersecting || !hasScrolled) {
 						return;
 					}
 					navLinks.forEach(link => {
@@ -1072,5 +1227,86 @@
 			return items[0];
 		}
 		return `${items.slice(0, -1).join(', ')} e ${items[items.length - 1]}`;
+	}
+
+	function setupIntelligentMobileBar() {
+		const mobileBar = document.querySelector('.mobile-contact-bar');
+		if (!mobileBar) {
+			return;
+		}
+		let ticking = false;
+
+		const handleScroll = () => {
+			const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+			if (currentScroll > 300) {
+				mobileBar.classList.add('visible');
+			} else {
+				mobileBar.classList.remove('visible');
+			}
+		};
+
+		window.addEventListener('scroll', () => {
+			if (!ticking) {
+				window.requestAnimationFrame(() => {
+					handleScroll();
+					ticking = false;
+				});
+				ticking = true;
+			}
+		});
+	}
+
+	function setupStatCounters() {
+		const statCards = document.querySelectorAll('.stats-grid .stat-card');
+		if (!statCards.length) {
+			return;
+		}
+		if (typeof IntersectionObserver === 'undefined') {
+			return;
+		}
+
+		const observer = new IntersectionObserver(
+			entries => {
+				entries.forEach(entry => {
+					if (!entry.isIntersecting || entry.target.dataset.counted === 'true') {
+						return;
+					}
+					const card = entry.target;
+					const valueElement = card.querySelector('.stat-value');
+					if (!valueElement) {
+						return;
+					}
+					card.dataset.counted = 'true';
+					card.classList.add('counting');
+					const originalText = valueElement.textContent;
+					const numMatch = originalText.match(/\d+/);
+					if (!numMatch) {
+						return;
+					}
+					const targetNumber = parseInt(numMatch[0], 10);
+					const prefix = originalText.substring(0, numMatch.index);
+					const suffix = originalText.substring(numMatch.index + numMatch[0].length);
+					const duration = 1500;
+					const steps = 30;
+					const increment = targetNumber / steps;
+					let current = 0;
+					let step = 0;
+
+					const counter = setInterval(() => {
+						step++;
+						current = Math.min(current + increment, targetNumber);
+						valueElement.textContent = `${prefix}${Math.floor(current)}${suffix}`;
+						if (step >= steps) {
+							clearInterval(counter);
+							valueElement.textContent = originalText;
+							setTimeout(() => card.classList.remove('counting'), 200);
+						}
+					}, duration / steps);
+				});
+			},
+			{ threshold: 0.5 }
+		);
+
+		statCards.forEach(card => observer.observe(card));
 	}
 })();

@@ -1,12 +1,12 @@
 /* Estilos para o modo escuro */
 
 body.dark-mode {
-	--primary-color: #66bb6a;
-	--primary-dark: #5aac5c;
+	--primary-color: #81c784;
+	--primary-dark: #66bb6a;
 	--secondary-color: #ffd54f;
-	--text-color: #e0e0e0;
-	--muted-text: #b3b3b3;
-	--heading-color: #f5f5f5;
+	--text-color: #e8e8e8;
+	--muted-text: #c4c4c4;
+	--heading-color: #ffffff;
 	--background-color: #0b0f16;
 	--surface-color: #151b23;
 	--shadow-sm: 0 6px 20px rgba(0, 0, 0, 0.55);
@@ -90,38 +90,53 @@ body.dark-mode .loading-state {
 	color: var(--secondary-color);
 }
 
-body.dark-mode .accordion {
-	background: rgba(21, 27, 35, 0.9);
-	border-color: rgba(255, 255, 255, 0.05);
+body.dark-mode .faq .accordion {
+	background: rgba(10, 15, 24, 0.7);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
-body.dark-mode .accordion-item.is-open {
-	background: rgba(102, 187, 106, 0.12);
-	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+body.dark-mode .faq .accordion-item {
+	background: rgba(11, 16, 26, 0.92);
+	border: 1px solid rgba(255, 255, 255, 0.04);
+	box-shadow: 0 18px 40px rgba(5, 5, 11, 0.65);
 }
 
-body.dark-mode .accordion-button {
-	color: var(--heading-color);
+body.dark-mode .faq .accordion-item.is-open {pen {
+	background: linear-gradient(120deg, rgba(62, 166, 107, 0.18), rgba(21, 63, 103, 0.25));
+	border-color: rgba(62, 166, 107, 0.55);
+	box-shadow: 0 25px 45px rgba(6, 9, 15, 0.75);
 }
 
-body.dark-mode .accordion-button:hover {
-	color: var(--primary-color);
-	background: rgba(102, 187, 106, 0.12);
+body.dark-mode .faq .accordion-button {ton {
+	color: #f7f9ff;
 }
 
-body.dark-mode .accordion-indicator {
-	background: linear-gradient(135deg, rgba(102, 187, 106, 0.4), rgba(76, 175, 80, 0.6));
-	color: #0f172a;
+body.dark-mode .faq .accordion-button:hover {ver {
+	background: rgba(255, 255, 255, 0.02);
 }
 
-body.dark-mode .accordion-button[aria-expanded='true'] .accordion-indicator {
-	color: #fff;
-	background: linear-gradient(135deg, rgba(102, 187, 106, 0.75), rgba(76, 175, 80, 0.9));
+body.dark-mode .faq .accordion-indicator {tor {
+	border: 1px solid rgba(255, 255, 255, 0.18);
+	background: rgba(255, 255, 255, 0.08);
+	color: #aafcd2;
+	box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
 }
 
-body.dark-mode .accordion-item.is-open .accordion-panel {
-	background: rgba(15, 20, 28, 0.85);
-	color: var(--muted-text);
+body.dark-mode .faq .accordion-button[aria-expanded='true'] .accordion-indicator {tor {
+	background: linear-gradient(135deg, rgba(121, 209, 140, 0.95), rgba(32, 201, 151, 1));
+	color: #05100a;
+	border-color: transparent;
+}
+
+body.dark-mode .faq .accordion-panel {
+	background: rgba(6, 10, 18, 0.9);
+	color: #dbe8ff;
+}
+
+body.dark-mode .faq .accordion-item.is-open .accordion-panel {nel {
+	background: rgba(7, 12, 20, 0.95);
+	color: #ffffff;
 }
 
 body.dark-mode .empty-state-card {

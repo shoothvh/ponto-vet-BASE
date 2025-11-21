@@ -37,36 +37,12 @@
 			"priceHint": "Consultas a partir de R$95 | planos de vacinação desde R$29/mês"
 		},
 		{
-			"icon": "fas fa-kit-medical",
-			"title": "Atendimento Emergencial",
-			"description": "Triagem imediata, estabilização e acesso direto à dupla cirúrgica fixa para decisões rápidas.",
-			"category": "tratamento",
-			"duration": "Imediato",
-			"priceHint": "Plantão sob disponibilidade"
-		},
-		{
-			"icon": "fas fa-notes-medical",
-			"title": "Check-up Anual",
-			"description": "Pacotes com exames laboratoriais, imagem e consulta com a dupla cirúrgica.",
-			"category": "preventivo",
-			"duration": "1 dia",
-			"priceHint": "Pacotes a partir de R$390"
-		},
-		{
 			"icon": "fas fa-x-ray",
-			"title": "Exames e Ultrassonografia",
-			"description": "Raio-X digital, ultrassom abdominal e gestacional, eco e doppler com laudos feitos na própria Bilac.",
+			"title": "Exames de Imagem e Laboratoriais",
+			"description": "Raio-X digital, ultrassom abdominal/gestacional, eco e doppler com laudos locais, além de hemogramas, bioquímica, dosagens hormonais e testes rápidos no mesmo dia.",
 			"category": "diagnostico",
-			"duration": "30 min",
-			"priceHint": "Exames a partir de R$95"
-		},
-		{
-			"icon": "fas fa-vials",
-			"title": "Exames Laboratoriais",
-			"description": "Hemograma completo, bioquímica, dosagens hormonais e testes rápidos.",
-			"category": "diagnostico",
-			"duration": "2 h",
-			"priceHint": "Painéis a partir de R$55"
+			"duration": "Conforme exame (30 min a 2 h)",
+			"priceHint": "Imagem a partir de R$95 | painéis laboratoriais desde R$55"
 		},
 		{
 			"icon": "fas fa-bone",
@@ -77,12 +53,12 @@
 			"priceHint": "Orçamentos transparentes a partir de R$790"
 		},
 		{
-			"icon": "fas fa-hospital-user",
-			"title": "Internação e UTI",
-			"description": "Internação monitorada diretamente pela dupla, com avaliações presenciais em turnos e contato diário com os tutores.",
+			"icon": "fas fa-kit-medical",
+			"title": "Emergência, Internação e UTI",
+			"description": "Triagem imediata, estabilização e internação monitorada diretamente pela dupla cirúrgica, com avaliações em turnos e contato diário com os tutores.",
 			"category": "tratamento",
-			"duration": "Monitorização em turnos",
-			"priceHint": "Diárias a partir de R$160 (convênios aceitos)"
+			"duration": "Imediato | Monitorização contínua",
+			"priceHint": "Plantões sob disponibilidade | diárias desde R$160"
 		},
 		{
 			"icon": "fas fa-dna",
@@ -112,13 +88,13 @@
 		},
 		{
 			"question": "Vocês oferecem teleorientação?",
-			"answer": "Sim, teleorientação diária das 7h às 22h para dúvidas leves e acompanhamento pós-procedimentos."
+			"answer": "Sim, teleorientação diária das 8h30 às 22h para dúvidas leves e acompanhamento pós-procedimentos."
 		}
 	],
 	"testimonials": [
 		{
 			"image": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-			"quote": "Atendimento incrível! A Dra. Ana foi super atenciosa com o meu cachorro, o Bob. Recomendo de olhos fechados.",
+			"quote": "Atendimento incrível! A Dra. Fabiola foi super atenciosa com o meu cachorro, o Bob. Recomendo de olhos fechados.",
 			"author": "Carlos Silva",
 			"pet": "Bob, SRD"
 		},
@@ -143,15 +119,15 @@
 	],
 	"team": [
 		{
-			"name": "Dra. Ana Luisa Moraes",
+			"name": "Dra. Fabiola Rosseto",
 			"role": "Clínica geral e fundadora",
 			"crm": "CRMV-SP 12345",
-			"specialties": ["Cardiologia", "Intensivismo"],
-			"photo": "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&w=600"
+			"specialties": ["Clínica médica", "Intensivismo"],
+			"photo": "img/fabiola.jpg"
 		},
 		{
-			"name": "Dr. Matheus Menani",
-			"role": "Cirurgião de tecidos moles e plantonista",
+			"name": "Dr. Matheus F. Menani",
+			"role": "Cirurgião e clínico geral, fundador",
 			"specialties": ["Cirurgia geral", "Atendimento emergencial"],
 			"photo": "img/matheus foto.png"
 		}

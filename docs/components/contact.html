@@ -24,43 +24,44 @@
 							autocomplete="off"
 						/>
 					</div>
-					<div class="row">
-						<div class="col-md-6 mb-3">
-							<label class="form-label" for="name">Nome</label>
-							<input
-								type="text"
-								id="name"
-								class="form-control"
-								placeholder="Maria Silva"
-								name="name"
-								maxlength="60"
-								required
-							/>
-						</div>
-						<div class="col-md-6 mb-3">
-							<label class="form-label" for="subject">Assunto</label>
-							<input
-								type="text"
-								id="subject"
-								class="form-control"
-								placeholder="Cirurgia, reprodução, exames..."
-								name="subject"
-								maxlength="120"
-								required
-							/>
-						</div>
+					<div class="mb-3">
+						<label class="form-label" for="name"
+							>Nome <span aria-label="campo obrigatório">*</span></label
+						>
+						<input
+							type="text"
+							id="name"
+							class="form-control"
+							placeholder="Maria Silva"
+							name="name"
+							autocomplete="name"
+							maxlength="60"
+							required
+							aria-required="true"
+							aria-describedby="name-help"
+						/>
+						<small id="name-help" class="form-text text-muted visually-hidden"
+							>Digite seu nome completo</small
+						>
 					</div>
 					<div class="mb-4">
-						<label class="form-label" for="message">Mensagem</label>
+						<label class="form-label" for="subject"
+							>Assunto <span aria-label="campo obrigatório">*</span></label
+						>
 						<textarea
 							class="form-control"
-							id="message"
-							rows="5"
-							name="message"
-							maxlength="500"
-							placeholder="Descreva sintomas, disponibilidade ou dúvidas."
+							id="subject"
+							rows="4"
+							name="subject"
+							maxlength="400"
+							placeholder="Descreva seu pedido ou dúvida em poucas linhas."
 							required
+							aria-required="true"
+							aria-describedby="subject-help"
 						></textarea>
+						<small id="subject-help" class="form-text text-muted visually-hidden"
+							>Descreva brevemente o motivo do contato</small
+						>
 					</div>
 					<div class="d-grid d-md-flex gap-3">
 						<button type="submit" class="btn btn-primary flex-fill">
@@ -69,6 +70,7 @@
 						<a
 							class="btn btn-outline-secondary flex-fill"
 							href="https://wa.me/5518997359924"
+							data-contact-whatsapp
 							target="_blank"
 							rel="noopener"
 							aria-label="Abrir conversa no WhatsApp"
