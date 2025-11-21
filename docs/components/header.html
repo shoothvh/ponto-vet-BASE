@@ -41,11 +41,19 @@
 					<li class="nav-item">
 						<div class="theme-switch-wrapper" aria-label="Alternar modo do site">
 							<label class="theme-switch" for="theme-toggle">
+								<span class="theme-switch-label" aria-hidden="true">Modo</span>
 								<span class="visually-hidden">Alternar modo escuro</span>
 								<input type="checkbox" id="theme-toggle" />
 								<div class="slider round" aria-hidden="true">
-									<i class="fas fa-sun"></i>
-									<i class="fas fa-moon"></i>
+									<span class="slider-option slider-option--light">
+										<i class="fas fa-sun" aria-hidden="true"></i>
+										<span>Claro</span>
+									</span>
+									<span class="slider-option slider-option--dark">
+										<i class="fas fa-moon" aria-hidden="true"></i>
+										<span>Escuro</span>
+									</span>
+									<span class="slider-thumb"></span>
 								</div>
 							</label>
 						</div>

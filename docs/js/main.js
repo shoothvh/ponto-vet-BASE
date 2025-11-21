@@ -22,10 +22,10 @@
 	const CONTENT_FALLBACK = {
 		hero: {
 			eyebrow: 'Emergências, cirurgias e reprodução',
-			title: 'Centro cirúrgico da PontoVet atende Bilac na Rua XV de Novembro, 615',
+			title: 'PontoVet: O Centro Veterinário Completo de Bilac.',
 			subtitle:
-				'De segunda a sexta, das 08h30 às 18h00, nossa dupla fixa acolhe emergências, cirurgias, exames completos e protocolos reprodutivos no mesmo endereço.',
-			ctaPrimary: { label: 'Agendar consulta', target: '#contato' },
+				'Consultas, exames, ultrassom e cirurgias em um só lugar. Atendimento especializado de segunda a sexta, das 08h30 às 18h00.',
+			ctaPrimary: { label: 'Agende uma consulta', target: '#contato' },
 			ctaSecondary: { label: 'Conheça os serviços', target: '#servicos' },
 			highlights: []
 		},
@@ -186,7 +186,10 @@
 			return await response.json();
 		} catch (error) {
 			console.error('Falha ao buscar conteúdo dinâmico.', error);
-			showToast('Não conseguimos atualizar o conteúdo agora. Exibindo dados padrão.', 'warning');
+			showToast(
+				'Não conseguimos atualizar o conteúdo agora. Exibindo dados padrão.',
+				'warning'
+			);
 			return {};
 		}
 	}
@@ -617,7 +620,10 @@
 			}
 		}
 		if (noMatches && !lastFilterEmpty) {
-			showToast('Nenhum serviço disponível nessa categoria agora. Experimente outra aba ou fale conosco.', 'info');
+			showToast(
+				'Nenhum serviço disponível nessa categoria agora. Experimente outra aba ou fale conosco.',
+				'info'
+			);
 		}
 		lastFilterEmpty = noMatches;
 	}

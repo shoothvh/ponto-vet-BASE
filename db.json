@@ -15,8 +15,8 @@
 	],
 	"hero": {
 		"eyebrow": "Emergências, cirurgias e reprodução",
-		"title": "Centro cirúrgico da PontoVet atende Bilac na Rua XV de Novembro, 615",
-		"subtitle": "De segunda a sexta, das 08h30 às 18h00, nossa dupla fixa acolhe emergências, cirurgias, exames completos, ultrassonografia e protocolos reprodutivos no mesmo endereço.",
+		"title": "PontoVet: O Centro Veterinário Completo de Bilac.",
+		"subtitle": "Consultas, exames, ultrassom e cirurgias em um só lugar. Atendimento especializado de segunda a sexta, das 08h30 às 18h00.",
 		"ctaPrimary": { "label": "Agende uma consulta", "target": "#contato" },
 		"ctaSecondary": { "label": "Conheça os serviços", "target": "#servicos" },
 		"highlights": []
@@ -30,11 +30,11 @@
 	"services": [
 		{
 			"icon": "fas fa-stethoscope",
-			"title": "Consultas Clínicas",
-			"description": "Avaliação completa com prontuário digital e plano alinhado às rotinas dos tutores de Bilac e região.",
+			"title": "Consultas Clínicas e Vacinação",
+			"description": "Avaliação completa com prontuário digital, calendário vacinal atualizado e lembretes automáticos para pets, plantéis bovinos e canis.",
 			"category": "preventivo",
 			"duration": "40 min",
-			"priceHint": "A partir de R$95"
+			"priceHint": "Consultas a partir de R$95 | planos de vacinação desde R$29/mês"
 		},
 		{
 			"icon": "fas fa-kit-medical",
@@ -43,14 +43,6 @@
 			"category": "tratamento",
 			"duration": "Imediato",
 			"priceHint": "Plantão sob disponibilidade"
-		},
-		{
-			"icon": "fas fa-syringe",
-			"title": "Vacinação e Imunização",
-			"description": "Calendário completo para pets, plantéis bovinos e canis, com lembretes automáticos e registro no app do tutor.",
-			"category": "preventivo",
-			"duration": "20 min",
-			"priceHint": "Planos a partir de R$29/mês"
 		},
 		{
 			"icon": "fas fa-notes-medical",
@@ -117,10 +109,6 @@
 		{
 			"question": "Atendem emergências 24 horas?",
 			"answer": "Nossa cirurgiã e nosso cirurgião mantêm uma escala sob demanda; consulte a disponibilidade imediata pelo WhatsApp."
-		},
-		{
-			"question": "Quais planos e convênios são aceitos?",
-			"answer": "Somos credenciados à PetLove, Health4Pet, Porto.Pet e oferecemos reembolso simplificado para outros convênios."
 		},
 		{
 			"question": "Vocês oferecem teleorientação?",
