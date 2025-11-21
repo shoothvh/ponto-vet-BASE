@@ -1,0 +1,207 @@
+{
+	"siteInfo": {
+		"name": "PontoVet",
+		"tagline": "Cirurgias, exames e reprodução em Bilac - SP",
+		"foundedYear": 2008,
+		"licenses": ["CRMV-SP 12345", "Anvisa CL-90811"],
+		"values": ["Humanização", "Tecnologia", "Transparência"]
+	},
+	"navigation": [
+		{ "label": "Início", "target": "#hero" },
+		{ "label": "Serviços", "target": "#servicos" },
+		{ "label": "Sobre", "target": "#sobre" },
+		{ "label": "Depoimentos", "target": "#depoimentos" },
+		{ "label": "Contato", "target": "#contato" }
+	],
+	"hero": {
+		"eyebrow": "Emergências, cirurgias e reprodução",
+		"title": "Centro cirúrgico da PontoVet atende Bilac na Rua XV de Novembro, 615",
+		"subtitle": "De segunda a sexta, das 08h30 às 18h00, nossa dupla fixa acolhe emergências, cirurgias, exames completos, ultrassonografia e protocolos reprodutivos no mesmo endereço.",
+		"ctaPrimary": { "label": "Agende uma consulta", "target": "#contato" },
+		"ctaSecondary": { "label": "Conheça os serviços", "target": "#servicos" },
+		"highlights": []
+	},
+	"stats": [
+		{ "label": "Pets atendidos/ano", "value": "+700" },
+		{ "label": "Satisfação de tutores", "value": "98%" },
+		{ "label": "Cirurgiões dedicados", "value": "2" },
+		{ "label": "Anos de história", "value": "2" }
+	],
+	"services": [
+		{
+			"icon": "fas fa-stethoscope",
+			"title": "Consultas Clínicas",
+			"description": "Avaliação completa com prontuário digital e plano alinhado às rotinas dos tutores de Bilac e região.",
+			"category": "preventivo",
+			"duration": "40 min",
+			"priceHint": "A partir de R$95"
+		},
+		{
+			"icon": "fas fa-kit-medical",
+			"title": "Atendimento Emergencial",
+			"description": "Triagem imediata, estabilização e acesso direto à dupla cirúrgica fixa para decisões rápidas.",
+			"category": "tratamento",
+			"duration": "Imediato",
+			"priceHint": "Plantão sob disponibilidade"
+		},
+		{
+			"icon": "fas fa-syringe",
+			"title": "Vacinação e Imunização",
+			"description": "Calendário completo para pets, plantéis bovinos e canis, com lembretes automáticos e registro no app do tutor.",
+			"category": "preventivo",
+			"duration": "20 min",
+			"priceHint": "Planos a partir de R$29/mês"
+		},
+		{
+			"icon": "fas fa-notes-medical",
+			"title": "Check-up Anual",
+			"description": "Pacotes com exames laboratoriais, imagem e consulta com a dupla cirúrgica.",
+			"category": "preventivo",
+			"duration": "1 dia",
+			"priceHint": "Pacotes a partir de R$390"
+		},
+		{
+			"icon": "fas fa-x-ray",
+			"title": "Exames e Ultrassonografia",
+			"description": "Raio-X digital, ultrassom abdominal e gestacional, eco e doppler com laudos feitos na própria Bilac.",
+			"category": "diagnostico",
+			"duration": "30 min",
+			"priceHint": "Exames a partir de R$95"
+		},
+		{
+			"icon": "fas fa-vials",
+			"title": "Exames Laboratoriais",
+			"description": "Hemograma completo, bioquímica, dosagens hormonais e testes rápidos.",
+			"category": "diagnostico",
+			"duration": "2 h",
+			"priceHint": "Painéis a partir de R$55"
+		},
+		{
+			"icon": "fas fa-bone",
+			"title": "Cirurgias Geral e Ortopédica",
+			"description": "Centro cirúrgico monitorado com anestesia inalatória e intensivismo.",
+			"category": "tratamento",
+			"duration": "Sob avaliação",
+			"priceHint": "Orçamentos transparentes a partir de R$790"
+		},
+		{
+			"icon": "fas fa-hospital-user",
+			"title": "Internação e UTI",
+			"description": "Internação monitorada diretamente pela dupla, com avaliações presenciais em turnos e contato diário com os tutores.",
+			"category": "tratamento",
+			"duration": "Monitorização em turnos",
+			"priceHint": "Diárias a partir de R$160 (convênios aceitos)"
+		},
+		{
+			"icon": "fas fa-dna",
+			"title": "Reprodução Bovina e Canina",
+			"description": "Coleta, inseminação, acompanhamento gestacional por ultrassom e protocolos hormonais customizados para plantéis e canis da região.",
+			"category": "tratamento",
+			"duration": "Sob agenda",
+			"priceHint": "Protocolos sob consulta"
+		},
+		{
+			"icon": "fas fa-bowl-food",
+			"title": "Nutrição e Controle de Peso",
+			"description": "Avaliação corporal, plano alimentar e acompanhamento com nutrólogos.",
+			"category": "bem-estar",
+			"duration": "45 min",
+			"priceHint": "Consultas a partir de R$110"
+		}
+	],
+	"faqs": [
+		{
+			"question": "Preciso agendar ou aceitam encaixe?",
+			"answer": "Recomendamos o agendamento via WhatsApp, mas mantemos duas vagas de encaixe por período para urgências."
+		},
+		{
+			"question": "Atendem emergências 24 horas?",
+			"answer": "Nossa cirurgiã e nosso cirurgião mantêm uma escala sob demanda; consulte a disponibilidade imediata pelo WhatsApp."
+		},
+		{
+			"question": "Quais planos e convênios são aceitos?",
+			"answer": "Somos credenciados à PetLove, Health4Pet, Porto.Pet e oferecemos reembolso simplificado para outros convênios."
+		},
+		{
+			"question": "Vocês oferecem teleorientação?",
+			"answer": "Sim, teleorientação diária das 7h às 22h para dúvidas leves e acompanhamento pós-procedimentos."
+		}
+	],
+	"testimonials": [
+		{
+			"image": "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+			"quote": "Atendimento incrível! A Dra. Ana foi super atenciosa com o meu cachorro, o Bob. Recomendo de olhos fechados.",
+			"author": "Carlos Silva",
+			"pet": "Bob, SRD"
+		},
+		{
+			"image": "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+			"quote": "A melhor clínica da região! Sempre sou muito bem recebida e sinto que minha gatinha, a Mia, está em ótimas mãos.",
+			"author": "Mariana Costa",
+			"pet": "Mia, gato persa"
+		},
+		{
+			"image": "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+			"quote": "Estrutura impecável e profissionais competentes. Fizeram uma cirurgia no meu cão e a recuperação foi excelente.",
+			"author": "Pedro Almeida",
+			"pet": "Thor, labrador"
+		},
+		{
+			"image": "https://images.pexels.com/photos/458804/pexels-photo-458804.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+			"quote": "Gostei dos feedbacks diários durante a internação. Transparência total com os tutores!",
+			"author": "Luciana Prado",
+			"pet": "Luna, shihtzu"
+		}
+	],
+	"team": [
+		{
+			"name": "Dra. Ana Luisa Moraes",
+			"role": "Clínica geral e fundadora",
+			"crm": "CRMV-SP 12345",
+			"specialties": ["Cardiologia", "Intensivismo"],
+			"photo": "https://images.pexels.com/photos/3714743/pexels-photo-3714743.jpeg?auto=compress&cs=tinysrgb&w=600"
+		},
+		{
+			"name": "Dr. Matheus Menani",
+			"role": "Cirurgião de tecidos moles e plantonista",
+			"specialties": ["Cirurgia geral", "Atendimento emergencial"],
+			"photo": "img/matheus foto.png"
+		}
+	],
+	"contact": {
+		"address": "Rua XV de Novembro, 615 - Bilac/SP",
+		"phone": "(18) 99735-9924",
+		"whatsapp": "+55 18 997359924",
+		"instagram": "@pontovetbilac",
+		"map": "https://www.google.com/local/place/fid/0x94966f000e8f1c8b:0xd1defe03eee0ff5/photosphere?iu=https://streetviewpixels-pa.googleapis.com/v1/thumbnail?panoid=IlSrpQLB6SXLvE7r-OIxnw&cb_client=search.gws-prod.gps&yaw=303.80588&pitch=0&thumbfov=100&w=0&h=0&ik=CAISFklsU3JwUUxCNlNYTHZFN3ItT0l4bnc=&sa=X&ved=2ahUKEwjtuYiL0YGRAxW4D7kGHeEFJNYQpx96BAgyEAU",
+		"emergency": {
+			"phone": "(18) 99735-9924",
+			"instructions": "Envie WhatsApp informando cidade, espécie e exames recentes para acionarmos a dupla de plantão."
+		}
+	},
+	"hours": [
+		{ "label": "Funcionamento", "value": "Segunda a sexta, 08h30 às 18h00" },
+		{
+			"label": "Emergências",
+			"value": "Acione pelo WhatsApp (18) 99735-9924 para triagem imediata"
+		}
+	],
+	"social": [
+		{ "platform": "Instagram", "url": "https://instagram.com/pontovetbilac" },
+		{ "platform": "WhatsApp", "url": "https://wa.me/5518997359924" }
+	],
+	"blogPosts": [
+		{
+			"title": "Checklist para o primeiro check-up do filhote",
+			"slug": "checkup-filhote",
+			"excerpt": "Veja o que levar e quais vacinas priorizar nos primeiros meses.",
+			"publishedAt": "2025-05-10"
+		},
+		{
+			"title": "Telemedicina veterinária: quando usar",
+			"slug": "telemedicina-veterinaria",
+			"excerpt": "Entenda em quais situações a teleorientação pode ajudar seu pet.",
+			"publishedAt": "2025-04-02"
+		}
+	]
+}

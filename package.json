@@ -1,0 +1,30 @@
+{
+	"name": "pontovet-site",
+	"version": "1.0.0",
+	"description": "Site institucional PontoVet com API segura para conteúdo e contato",
+	"main": "src/server.js",
+	"scripts": {
+		"start": "node src/server.js",
+		"dev": "nodemon src/server.js",
+		"lint": "eslint .",
+		"format": "prettier --write .",
+		"format:check": "prettier --check .",
+		"check": "npm run lint && npm run format:check"
+	},
+	"author": "",
+	"license": "MIT",
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"helmet": "^7.0.0",
+		"morgan": "^1.10.0",
+		"nodemailer": "^7.0.10"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.13.0",
+		"eslint": "^9.13.0",
+		"globals": "^15.9.0",
+		"nodemon": "^3.0.2",
+		"prettier": "^3.3.3"
+	}
+}

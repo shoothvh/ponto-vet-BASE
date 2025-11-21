@@ -1,0 +1,136 @@
+/* Estilos para o modo escuro */
+
+body.dark-mode {
+	--primary-color: #66bb6a;
+	--primary-dark: #5aac5c;
+	--secondary-color: #ffd54f;
+	--text-color: #e0e0e0;
+	--muted-text: #b3b3b3;
+	--heading-color: #f5f5f5;
+	--background-color: #0b0f16;
+	--surface-color: #151b23;
+	--shadow-sm: 0 6px 20px rgba(0, 0, 0, 0.55);
+	--shadow-lg: 0 25px 60px rgba(0, 0, 0, 0.65);
+}
+
+body.dark-mode p,
+body.dark-mode .lead,
+body.dark-mode .stat-label,
+body.dark-mode .hero-figure figcaption {
+	color: var(--muted-text);
+}
+
+body.dark-mode .navbar,
+body.dark-mode .contact-card,
+body.dark-mode .contact-info-card,
+body.dark-mode .operating-hours,
+body.dark-mode .card,
+body.dark-mode .testimonial-card,
+body.dark-mode .about-media img,
+body.dark-mode .site-footer {
+	background-color: var(--surface-color);
+	box-shadow: var(--shadow-sm);
+}
+
+body.dark-mode .navbar-brand,
+body.dark-mode .footer-brand {
+	color: var(--heading-color);
+}
+
+body.dark-mode .brand-mark,
+body.dark-mode .footer-brand img {
+	background: #0f172a;
+	border-color: rgba(235, 190, 218, 0.35);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+}
+
+body.dark-mode .navbar-nav .nav-link,
+body.dark-mode .footer-bottom a {
+	color: var(--text-color);
+}
+
+body.dark-mode .hero-figure figcaption,
+body.dark-mode .badge-pill {
+	background: rgba(21, 27, 35, 0.9);
+}
+
+body.dark-mode .about-list i,
+body.dark-mode .hero-highlights i,
+body.dark-mode .service-icon,
+body.dark-mode .social-icons a:hover {
+	color: var(--secondary-color);
+}
+
+body.dark-mode .form-control {
+	background-color: #1f2732;
+	border-color: #2b3542;
+	color: var(--text-color);
+}
+
+body.dark-mode .form-control:focus {
+	border-color: var(--primary-color);
+	box-shadow: 0 0 0 0.15rem rgba(102, 187, 106, 0.25);
+}
+
+body.dark-mode .site-footer {
+	background: #05070b;
+	color: #c0cad8;
+}
+
+body.dark-mode .footer-bottom {
+	border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .back-to-top {
+	background-color: var(--primary-color);
+}
+
+body.dark-mode .loading-state {
+	background: rgba(255, 213, 79, 0.1);
+	color: var(--secondary-color);
+}
+
+body.dark-mode .accordion {
+	background: rgba(21, 27, 35, 0.9);
+	border-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .accordion-item.is-open {
+	background: rgba(102, 187, 106, 0.12);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .accordion-button {
+	color: var(--heading-color);
+}
+
+body.dark-mode .accordion-button:hover {
+	color: var(--primary-color);
+	background: rgba(102, 187, 106, 0.12);
+}
+
+body.dark-mode .accordion-indicator {
+	background: linear-gradient(135deg, rgba(102, 187, 106, 0.4), rgba(76, 175, 80, 0.6));
+	color: #0f172a;
+}
+
+body.dark-mode .accordion-button[aria-expanded='true'] .accordion-indicator {
+	color: #fff;
+	background: linear-gradient(135deg, rgba(102, 187, 106, 0.75), rgba(76, 175, 80, 0.9));
+}
+
+body.dark-mode .accordion-item.is-open .accordion-panel {
+	background: rgba(15, 20, 28, 0.85);
+	color: var(--muted-text);
+}
+
+body.dark-mode .empty-state-card {
+	background: rgba(7, 12, 20, 0.92);
+	border-color: rgba(255, 255, 255, 0.18);
+	box-shadow: 0 25px 55px rgba(0, 0, 0, 0.65);
+	color: var(--muted-text);
+}
+
+body.dark-mode .empty-state-card h3 {
+	color: var(--heading-color);
+}
