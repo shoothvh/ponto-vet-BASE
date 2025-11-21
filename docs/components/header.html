@@ -2,13 +2,20 @@
 	<nav class="navbar navbar-expand-lg navbar-light" aria-label="Navegação principal">
 		<div class="container">
 			<a class="navbar-brand" href="#hero">
-				<img
-					src="img/ponto vet Logo.png"
-					alt="Logotipo da PontoVet"
-					width="60"
-					height="60"
-					class="brand-mark brand-mark--image"
-				/>
+				<picture>
+					<source srcset="img/logo-pontovet.avif" type="image/avif" />
+					<source srcset="img/logo-pontovet.webp" type="image/webp" />
+					<img
+						src="img/logo-pontovet.png"
+						alt="Logotipo da PontoVet"
+						width="60"
+						height="60"
+						class="brand-mark brand-mark--image"
+						loading="lazy"
+						decoding="async"
+						fetchpriority="high"
+					/>
+				</picture>
 			</a>
 			<button
 				class="navbar-toggler"

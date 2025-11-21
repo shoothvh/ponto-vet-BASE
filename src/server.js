@@ -7,7 +7,9 @@ const fs = require('fs');
 const rateLimit = require('express-rate-limit');
 const compression = require('compression');
 const apicache = require('apicache');
-const xss = require('xss-clean');
+// XSS sanitization handled via custom middleware using sanitize-html
+const { sanitizeRequest } = require('./middleware/sanitize');
+const { validationMiddleware } = require('./middleware/validate');
 const { env } = require('./config/env');
 const { readContent } = require('./services/contentService');
 
@@ -51,18 +53,28 @@ const cspDirectives = {
 const cache = apicache.middleware;
 
 app.disable('x-powered-by');
-app.use(
-	helmet({
-		contentSecurityPolicy: { directives: cspDirectives },
-		referrerPolicy: { policy: 'no-referrer-when-downgrade' },
-		crossOriginEmbedderPolicy: true,
-		crossOriginOpenerPolicy: { policy: 'same-origin' },
-		crossOriginResourcePolicy: { policy: 'same-origin' },
-		frameguard: { action: 'deny' },
-		hsts: { maxAge: 63072000, includeSubDomains: true, preload: true },
-		hidePoweredBy: true
-	})
-);
+if (env.isProduction) {
+	app.use(
+		helmet({
+			contentSecurityPolicy: { directives: cspDirectives },
+			referrerPolicy: { policy: 'no-referrer' },
+			frameguard: { action: 'deny' },
+			hsts: { maxAge: 63072000, includeSubDomains: true, preload: true },
+			hidePoweredBy: true
+		})
+	);
+} else {
+	// Em desenvolvimento desabilita CSP estrito para facilitar debug de scripts/estilos
+	app.use(
+		helmet({
+			contentSecurityPolicy: false,
+			crossOriginResourcePolicy: false,
+			crossOriginOpenerPolicy: false,
+			crossOriginEmbedderPolicy: false,
+			hidePoweredBy: true
+		})
+	);
+}
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan(env.isProduction ? 'combined' : 'dev'));
@@ -76,7 +88,9 @@ app.use(morgan(env.isProduction ? 'combined' : 'dev'));
 // });
 // app.use(limiter);
 app.use(compression());
-app.use(xss());
+// Validação de schema ANTES da sanitização (pedido do usuário)
+app.use(validationMiddleware);
+app.use(sanitizeRequest);
 
 app.use((req, res, next) => {
 	if (req.path.includes('..')) {
@@ -89,6 +103,7 @@ app.use((req, res, next) => {
 });
 
 const NO_STORE_EXTENSIONS = new Set(['.html', '.js', '.css', '.json', '.map']);
+const LONG_CACHE_IMAGES = new Set(['.png', '.jpg', '.jpeg', '.webp', '.avif']);
 const staticOptions = {
 	index: false,
 	fallthrough: true,
@@ -96,6 +111,9 @@ const staticOptions = {
 		const ext = path.extname(filePath).toLowerCase();
 		if (NO_STORE_EXTENSIONS.has(ext)) {
 			res.setHeader('Cache-Control', 'no-store');
+		} else if (LONG_CACHE_IMAGES.has(ext)) {
+			// 30 dias de cache para imagens otimizadas (imutáveis)
+			res.setHeader('Cache-Control', 'public, max-age=' + 60 * 60 * 24 * 30 + ', immutable');
 		} else {
 			res.setHeader('Cache-Control', 'public, max-age=3600, must-revalidate');
 		}
@@ -115,6 +133,18 @@ app.get('/api/content', cache('5 minutes'), async (req, res) => {
 		console.error(error.message);
 		res.status(500).json({ message: 'Não foi possível carregar os dados.' });
 	}
+});
+
+// Endpoint exemplo de contato sem campo de email (apenas nome e mensagem)
+// Teste rápido:
+// curl -X POST http://localhost:" + PORT + "/api/contact -H "Content-Type: application/json" -d '{"name":"Teste","message":"Olá mensagem"}'
+app.post('/api/contact', (req, res) => {
+	// Após validação e sanitização, dados ficam em req.validated
+	if (!req.validated) {
+		return res.status(500).json({ message: 'Falha de validação inesperada.' });
+	}
+	// Aqui poderíamos enviar email ou persistir; por ora apenas retorna eco seguro
+	res.status(202).json({ message: 'Recebido com sucesso', data: req.validated });
 });
 
 app.get('*', (req, res, next) => {

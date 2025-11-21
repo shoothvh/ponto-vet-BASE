@@ -10,7 +10,11 @@
 		"format": "prettier --write .",
 		"format:check": "prettier --check .",
 		"check": "npm run lint && npm run format:check",
-		"validate:content": "node scripts/validate-content.js"
+		"validate:content": "node scripts/validate-content.js",
+		"images:fetch": "node scripts/fetch-external-images.js",
+		"images:optimize": "node scripts/optimize-images.js",
+		"images:all": "npm run images:fetch && npm run images:optimize",
+		"images:lint": "node scripts/lint-image-names.js"
 	},
 	"author": "",
 	"license": "MIT",
@@ -22,7 +26,9 @@
 		"express-rate-limit": "^8.2.1",
 		"helmet": "^7.2.0",
 		"morgan": "^1.10.0",
-		"xss-clean": "^0.1.4"
+		"sanitize-html": "^2.12.1",
+		"sharp": "^0.34.5",
+		"zod": "^3.25.76"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.13.0",

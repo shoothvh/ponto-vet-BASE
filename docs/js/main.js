@@ -412,9 +412,27 @@
 		team.forEach(member => {
 			const column = document.createElement('div');
 			column.className = 'col-lg-3 col-md-4 col-sm-6';
+			const photoBase = member.photo || '';
+			// Normaliza caminhos com espaços substituindo por hífen (caso a API ainda envie nomes antigos)
+			const cleanedPhotoBase = photoBase.replace(/\s+/g, '-');
+			if (cleanedPhotoBase !== photoBase) {
+				member.photo = cleanedPhotoBase;
+			}
+			const effectivePhoto = cleanedPhotoBase;
+			const baseNoExt = effectivePhoto.replace(/\.(png|jpe?g)$/i, '');
+			const hasRaster = /\.(png|jpe?g)$/i.test(effectivePhoto);
+			const sizes = [80,120,240];
+			const srcsetWebp = sizes.map(s => `${escapeAttribute(baseNoExt)}-${s}.webp ${s}w`).join(', ');
+			const srcsetAvif = sizes.map(s => `${escapeAttribute(baseNoExt)}-${s}.avif ${s}w`).join(', ');
+			const fallbackSrc = hasRaster ? `${escapeAttribute(effectivePhoto)}` : '';
+			const photoMarkup = hasRaster ? `<div class="team-photo"><picture>
+				<source type="image/avif" srcset="${srcsetAvif}, ${escapeAttribute(baseNoExt)}.avif 1200w" sizes="(max-width: 576px) 80px, (max-width: 992px) 120px, 240px">
+				<source type="image/webp" srcset="${srcsetWebp}, ${escapeAttribute(baseNoExt)}.webp 1200w" sizes="(max-width: 576px) 80px, (max-width: 992px) 120px, 240px">
+				<img src="${fallbackSrc}" alt="Foto profissional - ${escapeAttribute(member.name || 'PontoVet')}" width="128" height="128" loading="lazy" decoding="async">
+			</picture></div>` : '';
 			column.innerHTML = `
 				<article class="team-card card h-100 text-center">
-					${member.photo ? `<div class="team-photo"><img src="${escapeAttribute(member.photo)}" alt="Foto profissional - ${escapeAttribute(member.name || 'PontoVet')}" width="128" height="128" loading="lazy" decoding="async"></div>` : ''}
+					${photoMarkup}
 					<h3 class="team-name">${escapeHTML(member.name || 'Profissional PontoVet')}</h3>
 					<p class="team-role">${escapeHTML(member.role || 'Especialista')}</p>
 					${member.crm ? `<p class="team-crm">${escapeHTML(member.crm)}</p>` : ''}
@@ -448,10 +466,25 @@
 		testimonials.forEach(testimonial => {
 			const column = document.createElement('div');
 			column.className = 'col-md-4 mb-4';
+			let imgPath = testimonial.image || '';
+			const cleaned = imgPath.replace(/\s+/g, '-');
+			imgPath = cleaned;
+			const baseNoExt = imgPath.replace(/\.(png|jpe?g)$/i, '');
+			const isLocalRaster = /^(img\/.+\.(png|jpe?g))$/i.test(imgPath);
+			const sizes = [80]; // avatar fixed size; still offer format fallbacks
+			const srcsetWebp = sizes.map(s => `${escapeAttribute(baseNoExt)}-${s}.webp ${s}w`).join(', ');
+			const srcsetAvif = sizes.map(s => `${escapeAttribute(baseNoExt)}-${s}.avif ${s}w`).join(', ');
+			const picture = isLocalRaster
+				? `<picture>
+					<source type="image/avif" srcset="${srcsetAvif}, ${escapeAttribute(baseNoExt)}.avif 1200w" sizes="80px">
+					<source type="image/webp" srcset="${srcsetWebp}, ${escapeAttribute(baseNoExt)}.webp 1200w" sizes="80px">
+					<img src="${escapeAttribute(imgPath)}" alt="Foto de ${escapeAttribute(testimonial.author)}" width="80" height="80" loading="lazy" decoding="async">
+				</picture>`
+				: `<img src="${escapeAttribute(imgPath)}" alt="Foto de ${escapeAttribute(testimonial.author)}" width="80" height="80" loading="lazy" decoding="async">`;
 			column.innerHTML = `
 				<article class="testimonial-card">
 					<div class="testimonial-avatar">
-						<img src="${escapeAttribute(testimonial.image)}" alt="Foto de ${escapeAttribute(testimonial.author)}" width="80" height="80" loading="lazy" decoding="async">
+						${picture}
 					</div>
 					<p class="testimonial-quote">"${escapeHTML(testimonial.quote)}"</p>
 					<div class="testimonial-author">${escapeHTML(testimonial.author)}</div>
